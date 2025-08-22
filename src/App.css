@@ -1,38 +1,139 @@
-.App {
-  text-align: center;
+:root {
+  --board-bg: #1273de;
+  --cell: #e8eef5;
+  --win: #ffd54f;
+  --text: #0f172a;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body, #root {
+  height: 100%;
+  margin: 0;
+  font-family: Arial;
+  color: var(--text);
+  background: #f7fafc;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.app {
+  max-width: 720px;
+  margin: 32px auto;
+  padding: 0 16px 24px;
+}
+
+h1 {
+  margin: 8px 0 16px;
+  font-size: 28px;
+}
+
+.toolbar {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  position: relative;
 }
 
-.App-link {
-  color: #61dafb;
+.status {
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 10px;
+  background: #eef2ff;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.status.win {
+  background: #dcfce7;
+}
+
+.status.draw {
+  background: #fde68a;
+}
+
+.restart {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+}
+
+.restart:hover {
+  background: #f1f5f9;
+}
+
+.board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: 80px;
+  gap: 10px;
+  padding: 16px;
+  background: var(--board-bg);
+  border-radius: 18px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+.cell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.cell .disc {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 8px var(--board-bg), 0 2px 4px rgba(0,0,0,0.08);
+  background: var(--cell);
+  transition: transform 120ms ease, box-shadow 120ms ease, outline-color 120ms ease;
+}
+
+.cell .disc.black {
+  background: #111827;
+}
+
+.cell .disc.red {
+  background: #ef4444;
+}
+
+.cell .disc.empty {
+  background: var(--cell);
+}
+
+.cell.win .disc {
+  outline: 4px solid var(--win);
+  outline-offset: -6px;
+}
+
+.desc {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #475569;
+  font-size: 14px;
+}
+
+.desc .dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.desc .dot.black {
+  background: #111827;
+}
+
+.desc .dot.red {
+  background: #ef4444;
 }
